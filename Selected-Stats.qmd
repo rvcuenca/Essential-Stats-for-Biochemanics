@@ -1,0 +1,414 @@
+---
+title: "A Quick Run-through of Some Selected Statistical Methods"
+format: revealjs
+---
+
+## Mean
+
+-   **Definition:** Sum of all values divided by the number of observations.
+-   **Formula:** $\displaystyle \bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$.
+-   **Interpretation:** Captures central tendency but is sensitive to outliers.
+
+------------------------------------------------------------------------
+
+## Median
+
+-   **Definition:** Middle value separating the higher half from the lower half of an ordered dataset.
+-   **Formula:**
+    -   If $n$ odd: $\operatorname{med}(x)=x_{(\frac{n+1}{2})}$\
+    -   If $n$ even: $\operatorname{med}=\tfrac{x_{(\frac{n}{2})}+x_{(\frac{n}{2}+1)}}{2}$.
+-   **Interpretation:** A robust center unaffected by extreme values.
+
+------------------------------------------------------------------------
+
+## Mode
+
+-   **Definition:** Value(s) occurring most frequently in a dataset.
+-   **Identification:** Count frequencies; the highest‐frequency value(s) are the mode.
+-   **Interpretation:** Highlights the most common data point(s), useful for categorical or nominal data.
+
+------------------------------------------------------------------------
+
+## Standard Deviation
+
+-   **Definition:** Square root of the variance; measures average deviation from the mean.
+-   **Formula:**
+    -   Population: $\sigma = \sqrt{\tfrac{1}{N}\sum_{i=1}^N (x_i - \mu)^2}$\
+    -   Sample: $s = \sqrt{\tfrac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2}$.
+-   **Interpretation:** Indicates overall spread in the same units as the data.
+
+------------------------------------------------------------------------
+
+## Interquartile Range (IQR)
+
+-   **Definition:** Difference between the third quartile ($Q_3$) and first quartile ($Q_1$).
+-   **Formula:** $\displaystyle \mathrm{IQR} = Q_3 - Q_1$.
+-   **Interpretation:** Spread of the middle 50%, robust to outliers.
+
+------------------------------------------------------------------------
+
+## Pearson Correlation
+
+-   **Definition:** Measures linear association between two variables, ranging from –1 to +1.
+-   **Formula:**\
+    $\displaystyle r = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\,\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}}$.
+-   **Interpretation:** Values near ±1 indicate strong linear relationship; 0 means no linear correlation.
+
+------------------------------------------------------------------------
+
+## Spearman Correlation
+
+-   **Definition:** Nonparametric measure of rank correlation, assessing monotonic relationships.
+-   **Formula:**\
+    $\displaystyle \rho = 1 - \frac{6\sum_{i=1}^n d_i^2}{n(n^2-1)}$, where $d_i$ is the difference in ranks.
+-   **Interpretation:** Captures monotonic trends; robust to outliers and non‐linear patterns.
+
+------------------------------------------------------------------------
+
+## Pearson vs. Spearman ??
+
+![Source: <https://commons.wikimedia.org/w/index.php?title=File:Spearman_fig2.svg&oldid=957852709.>](images/clipboard-1846881466.png){fig-align="center" width="98%"}
+
+
+
+# Regression-Type Modelling
+
+
+# Simple Linear Regression
+
+---
+
+## Simple Regression: Model Specification
+
+The simple linear regression model posits
+
+$$
+y_i \;=\;\beta_0 \;+\;\beta_1\,x_i \;+\;\epsilon_i,
+$$
+
+with random errors $\epsilon_i\sim N(0,\sigma^2)$. 
+
+---
+
+## Simple Regression: Estimation
+
+Ordinary least squares estimates $\hat{\beta}_0,\hat{\beta}_1$ by minimizing $\sum \epsilon_i^2$, yielding
+
+$$
+\hat{\beta}_1 \;=\;\frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2},  
+\quad  
+\hat{\beta}_0 = \bar{y}-\hat{\beta}_1\bar{x}.
+$$ 
+
+
+
+# Multiple Linear Regression
+
+---
+
+## Multiple Regression: Model Specification  
+
+Multiple linear regression extends to \(p\) predictors:  
+$$
+y_i \;=\;\beta_0 \;+\;\sum_{k=1}^p \beta_k\,x_{ik} \;+\;\epsilon_i,
+$$
+
+with $\epsilon_i\sim N(0,\sigma^2)$. 
+
+---
+
+## Multiple Regression: Matrix Form and Inference
+
+In matrix notation,
+
+$$
+\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon},\quad \boldsymbol{\epsilon}\sim N(\mathbf{0}, \sigma^2I_p)
+$$
+
+and the OLS solution is
+
+$$
+\hat{\boldsymbol{\beta}} = (\mathbf{X}^\top\mathbf{X})^{-1}\,\mathbf{X}^\top\,\mathbf{y},
+$$
+
+assuming full-rank $\mathbf{X}$ .
+
+# Linear Models or General Linear Model
+
+---
+
+## (General) Linear Models
+
+The (general) linear model compactly represents multiple (possibly multivariate) response regression as
+
+$$
+\mathbf{Y} = \mathbf{X}\,\mathbf{B} + \mathbf{U},
+$$
+
+where columns of $\mathbf{Y}$ are different dependent variables and $\mathbf{U}$ contains error terms .
+
+---
+
+## Linear Models: Hypothesis Testing
+
+Linear hypotheses $H_0: \mathbf{C}\,\mathrm{vec}(\mathbf{B}) = \mathbf{d}$ are tested via F-statistics under normality of $\mathbf{U}$, using contrasts $\mathbf{C}$ to form test statistics .
+
+---
+
+# Generalized Linear Models (GLM)
+
+---
+
+## Generalized Linear Models: Model Components
+
+A GLM has three components:
+
+$$
+\begin{aligned}
+&\textbf{RC:}\quad
+f(\mathbf{y};\boldsymbol{\theta},\phi)
+= \exp\!\Bigl\{\tfrac{\mathbf{y}^\top\boldsymbol{\theta} \;-\;\mathbf{1}^\top b(\boldsymbol{\theta})}{a(\phi)}
+\;+\;\mathbf{1}^\top c(\mathbf{y},\phi)\Bigr\}, \\[6pt]
+&\textbf{SC:}\quad
+\boldsymbol{\eta} \;=\; X\,\boldsymbol{\beta}, 
+\quad \eta_i = \mathbf{x}_i^\top\boldsymbol{\beta}, \\[4pt]
+&\textbf{LF:}\quad
+g(\boldsymbol{\mu}) \;=\;\boldsymbol{\eta}, 
+\quad \boldsymbol{\mu} \;=\;g^{-1}(\boldsymbol{\eta}), 
+\quad \mu_i = E[Y_i].
+\end{aligned}
+$$
+where **Random component (RC)**, **Systematic component (SC)**, and **Link function (LF)**. 
+
+---
+
+## Generalized Linear Models: Estimation
+
+Parameters $\boldsymbol{\beta}$ are estimated by maximum likelihood via iteratively reweighted least squares, solving
+
+$$
+\mathbf{X}^\top \mathbf{W} (\mathbf{y}-\boldsymbol{\mu}) = \mathbf{0},
+$$
+
+where $\mathbf{W}$ is a weight matrix depending on $\mu_i$ and the variance function .
+
+
+# Linear Mixed Effects Models (LMM)
+
+---
+
+## LMM: Model Specification
+
+Linear mixed effects models incorporate fixed and random effects:
+
+$$
+\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{Z}\mathbf{b} + \boldsymbol{\epsilon},
+$$
+
+with $\mathbf{b}\sim N(\mathbf{0},\mathbf{G})$ and $\boldsymbol{\epsilon}\sim N(\mathbf{0},\mathbf{R})$ .
+
+---
+
+## LMM: Estimation
+
+Fixed effects $\boldsymbol{\beta}$ and variance components $\mathbf{G},\mathbf{R}$ are typically estimated by restricted maximum likelihood (REML), and random effects $\mathbf{b}$ by best linear unbiased prediction (BLUP) .
+
+# Generalized Linear Mixed Effects Models (GLLM)
+
+---
+
+## GLLM: Model Specification
+
+GLMMs extend GLMs by adding random effects into the linear predictor:
+$$
+g\bigl(E[Y_i \mid \mathbf{b}]\bigr) \;=\;\mathbf{x}_i^\top\boldsymbol{\beta} + \mathbf{z}_i^\top\mathbf{b},  
+\quad \mathbf{b}\sim N(\mathbf{0},\mathbf{G}).
+$$
+
+---
+
+## GLLM: Estimation  
+
+Estimation typically employs Laplace approximation or adaptive Gauss–Hermite quadrature to approximate the marginal likelihood  
+$$\int f(\mathbf{y}\mid \mathbf{b})\,f(\mathbf{b})\,d\mathbf{b}.$$
+
+# Generalized Additive Models (GAM)
+
+---
+
+## GAM: Model Specification  
+Generalized additive models replace linear terms with smooth functions:  
+$$
+y_i \;=\;\beta_0 + \sum_{j=1}^p f_j(x_{ij}) + \epsilon_i,
+$$
+
+where each $f_j$ is a nonparametric smooth function estimated from the data .
+
+---
+
+## GAM: Estimation
+
+The smooth functions $f_j$ are estimated using penalized regression splines via backfitting or penalized likelihood, controlling smoothness with penalties on the wiggliness of $f_j$ .
+
+---
+
+# Some Commonly Used Smooth Functions
+
+---
+
+## Thin Plate Regression Splines
+
+  $$
+    f(\mathbf{x}) = \sum_{j=1}^k \alpha_j\,\phi_j(\mathbf{x}),
+  $$
+
+  with roughness penalty
+
+  $$
+    J[f] = \iint \Bigl((\partial_{xx}f)^2 + 2(\partial_{xy}f)^2 + (\partial_{yy}f)^2\Bigr)\,dx\,dy.
+  $$
+
+---
+
+## Cubic Regression Splines
+
+  $$
+    f(x) = \sum_{j=1}^k \beta_j\,B_j(x),
+  $$
+
+  where $B_j$ are cubic B-spline basis functions, and the penalty is
+  $$\int [f''(x)]^2\,dx.$$
+
+---
+
+## P-Splines
+
+  $$
+    f(x) = \sum_{j=1}^k \beta_j\,B_j(x),
+  $$
+
+  with discrete difference penalty
+  $$\sum_{j=d+1}^k (\Delta^d \beta_j)^2,$$ where $$\Delta^d \beta_j = \beta_j - \beta_{j-d}.$$
+
+---
+
+## Cyclic Cubic Regression Splines
+
+  Same as cubic splines but with periodicity constraints
+  $f^{(m)}(x_1)=f^{(m)}(x_n)$ for $m=0,1$, and penalty
+  $$\int [f''(x)]^2\,dx.$$
+
+---
+
+## Adaptive Smoothers
+
+  $$
+    \min_f \sum_i (y_i - f(x_i))^2 \;+\; \int \lambda(x)\,[f''(x)]^2\,dx,
+  $$
+
+  where the smoothing weight $\lambda(x)$ varies over the domain.
+
+---
+
+## Low-Rank Duchon Splines
+
+  $$
+    f(\mathbf{x}) = \sum_{j=1}^k \alpha_j\,\psi_j(\mathbf{x}),
+  $$
+
+  with Fourier-domain penalty
+  $$\displaystyle \int \lvert\omega\rvert^m\,\lvert\hat f(\omega)\rvert^2\,d\omega.$$
+
+---
+
+## Tensor Product Smooths
+
+  $$
+    f(x,z) = \sum_{i=1}^{k_1}\sum_{j=1}^{k_2} \alpha_{ij}\,B_i(x)\,C_j(z),
+  $$
+
+  with separate penalties applied to each marginal bases $B_i$ and $C_j$.
+
+---
+
+## Interaction-Only Smooths
+
+  Same tensor product but **excludes** univariate smooths, so
+
+  $$
+    f(x,z) = \sum_{i,j}\alpha_{ij}\,B_i(x)\,C_j(z),
+    \quad\text{no }f_1(x)\text{ or }f_2(z).
+  $$
+
+
+---
+
+## Random Effect Smooths
+
+  $$
+    f(g_i) = b_{g_i}, 
+    \quad \mathbf b\sim N(\mathbf0,\sigma^2\mathbf I),
+  $$
+
+  equivalent to random intercepts with penalty $\mathbf b^\top\mathbf b$.
+
+---
+
+## Factor-By Smooths
+
+  $$
+    f(x,\text{fac}_i)=\sum_{k=1}^L I(\text{fac}_i=k)\,f_k(x),
+  $$
+
+  with one smooth per factor level sharing a penalty
+  $\sum_k\int [f_k''(x)]^2\,dx$. 
+
+---
+
+## Markov Random Field Smooths
+
+  $$
+    \text{Penalty} = \sum_{i\sim j} (f_i - f_j)^2,
+  $$
+
+  where $i\sim j$ denotes spatial adjacency on areal units.
+
+---
+
+## Soap-Film Boundary Smooths
+
+  Basis functions $\psi_j$ satisfy boundary constraints over a domain $\Omega$, with penalty
+  $$\int_\Omega (\Delta f)^2\,dx.$$
+
+---
+
+## Splines on the Sphere
+
+  $$
+    f(\theta,\phi)=\sum_{l=0}^L\sum_{m=-l}^l \alpha_{lm}\,Y_{lm}(\theta,\phi),
+  $$
+
+  with penalty $$\sum_{l,m} l(l+1)\,\alpha_{lm}^2.$$
+
+---
+
+## Gaussian Process Smooths
+
+  $$
+    f(x)\sim\mathcal{GP}(0,\,k(x,x')),
+  $$
+
+  where $k$ may be Matérn, exponential, etc., and the penalty is the RKHS norm $\|f\|^2_{\mathcal H}$.
+
+
+---
+
+## QR of Sources
+
+
+
+
+---
+
+
+# Thank you for listening
