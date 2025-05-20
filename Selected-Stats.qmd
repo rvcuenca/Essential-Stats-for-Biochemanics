@@ -407,10 +407,16 @@ The smooth functions $f_j$ are estimated using penalized regression splines via 
 
 ## QR of My Presentations and Materials
 
+::: {.columns}
 
+::: {.column}
 ![](images/biomech-talk-qr-code.png)
+:::
 
----
+::: {.column}
 
+ <span style="font-size:2.8em;"> **Thank you for listening ;)**</span>
 
-# Thank you for listening
+:::
+
+:::
