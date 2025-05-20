@@ -363,7 +363,7 @@ The smooth functions $f_j$ are estimated using penalized regression splines via 
   $$
 
   with one smooth per factor level sharing a penalty
-  $\sum_k\int [f_k''(x)]^2\,dx$. 
+  $$\sum_k\int [f_k''(x)]^2\,dx.$$
 
 ---
 
