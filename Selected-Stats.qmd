@@ -1,6 +1,8 @@
 ---
 title: "A Quick Run-through of Some Selected Statistical Methods"
-format: revealjs
+format: 
+  revealjs:
+    embed-resources: true
 ---
 
 ## Mean
@@ -403,10 +405,10 @@ The smooth functions $f_j$ are estimated using penalized regression splines via 
 
 ---
 
-## QR of Sources
+## QR of My Presentations and Materials
 
 
-
+![](images/biomech-talk-qr-code.png)
 
 ---
 
